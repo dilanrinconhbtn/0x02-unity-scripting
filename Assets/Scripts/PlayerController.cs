@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,9 +9,13 @@ public class PlayerController : MonoBehaviour
     private int score = 0;
     public int health = 5;
     // Start is called before the first frame update
-    void Start()
+    void Update()
     {
-        
+        if(health == 0)
+        {
+            Debug.Log("Game Over!");
+            SceneManager.LoadScene(0);
+        }
     }
     // Update is called once per frame
     // fixed beacuse includes physiscs  
@@ -46,6 +51,10 @@ public class PlayerController : MonoBehaviour
         {
             health--;
             Debug.Log("Health: " + health.ToString());
+        }
+        if (other.gameObject.CompareTag("Goal"))
+        {
+            Debug.Log("You win!");
         }
     }
 }
